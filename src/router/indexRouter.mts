@@ -1,6 +1,7 @@
 import { Router } from "express";
-import indexController from "../controller/indexController.mjs";
 const indexRouter = Router();
+import { getLandingPage } from "../controller/indexController.mjs";
 
-indexRouter.use(ensureAuth);
-indexRouter.get("/", indexController.indexGet);
+indexRouter.get("/", getLandingPage);
+
+export default indexRouter;

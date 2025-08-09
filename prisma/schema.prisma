@@ -14,3 +14,11 @@ model Session {
   data      String
   expiresAt DateTime
 }
+
+model User {
+  id             Int      @id @default(autoincrement())
+  userName       String   @unique @db.VarChar(255)
+  email          String
+  hashedPassword String
+  createdAt      DateTime @default(now())
+}

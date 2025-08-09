@@ -17,8 +17,8 @@ model Session {
 
 model User {
   id             Int      @id @default(autoincrement())
-  userName       String   @unique @db.VarChar(255)
+  userName       String   @unique @map("user_name") @db.VarChar(255)
   email          String
-  hashedPassword String
-  createdAt      DateTime @default(now())
+  hashedPassword String   @map("hashed_password")
+  createdAt      DateTime @default(now()) @map("created_at")
 }

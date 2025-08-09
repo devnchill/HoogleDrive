@@ -13,6 +13,7 @@
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
+    "typeRoots": ["./types", "./generated/prisma", "./node_modules/@types"],
     // and npm install -D @types/node
 
     // Other Outputs

@@ -22,6 +22,8 @@ app.use(
   }),
 );
 
+app.get("/", indexRouter);
+
 app.listen(PORT, () => {
   console.log("Server Listening on Port", PORT);
 });

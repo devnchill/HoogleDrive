@@ -1,0 +1,38 @@
+{
+  "name": "hoogledrive",
+  "version": "1.0.0",
+  "description": "A stripped down version of Google Drive.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc && node dist/app.mjs",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devnchill/HoogleDrive.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devnchill/HoogleDrive/issues"
+  },
+  "homepage": "https://github.com/devnchill/HoogleDrive#readme",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/express-session": "^1.18.2",
+    "@types/node": "^24.2.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-local": "^1.0.38",
+    "prisma": "^6.13.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}

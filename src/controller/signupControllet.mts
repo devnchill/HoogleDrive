@@ -8,7 +8,10 @@ export function getSigUpForm(
   res: Response,
   _next: NextFunction,
 ) {
-  res.render("signup");
+  res.render("signup", {
+    formData: {},
+    err: {},
+  });
 }
 
 export const validateUser = [
@@ -37,7 +40,7 @@ export const validateUser = [
 export async function postSigUpForm(
   req: Request,
   res: Response,
-  _next: NextFunction,
+  next: NextFunction,
 ) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -50,13 +53,20 @@ export async function postSigUpForm(
       err: errorMap,
     });
   }
-  const { userName, email, password, confirmPassword } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  await prismaClient.user.create({
-    data: {
-      userName,
-      email,
-      hashedPassword,
-    },
-  });
+  try {
+    const { userName, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await prismaClient.user.create({
+      data: { userName, email, hashedPassword },
+    });
+    res.redirect("/");
+  } catch (err: any) {
+    if (err.code === "P2002" && err.meta?.target?.includes("email")) {
+      return res.status(400).render("signup", {
+        formData: req.body,
+        err: { email: "Email already in use" },
+      });
+    }
+    return next(err);
+  }
 }

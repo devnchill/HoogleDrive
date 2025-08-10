@@ -1,4 +1,5 @@
 import express from "express";
+import type { Request, Response, NextFunction } from "express";
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { PrismaClient } from "../generated/prisma/index.js";
@@ -37,6 +38,13 @@ app.use(passport.session());
 
 app.use("/signup", signupRouter);
 app.use("/", indexRouter);
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  const error = err instanceof Error ? err : new Error(String(err));
+  res.status(500).render("partial/error", {
+    message: "Something went wrong.",
+    stack: process.env.NODE_ENV === "production" ? "" : error.stack,
+  });
+});
 
 app.listen(PORT, () => {
   console.log("Server Listening on Port", PORT);

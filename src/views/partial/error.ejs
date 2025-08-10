@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+  <head>
+    <title>Error</title>
+  </head>
+  <body >
+    <h1 >Internal Server Error</h1>
+    <p ><%= message %></p>
+    <% if (stack) { %>
+      <pre ><%= stack %></pre>
+    <% } %>
+  </body>
+</html>

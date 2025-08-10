@@ -3,20 +3,36 @@
     <form method="POST" action="/signup">
       <div>
         <label>UserName:</label>
-        <input required name="userName" />
+        <input required name="userName" value="<%= formData.userName || '' %>"/>
+        <% if (err.userName) { %>
+          <span ><%= err.userName %></span>
+        <% } %>
       </div>
+
       <div>
         <label>Email:</label>
-        <input required name="email"/>
+        <input required name="email" value="<%= formData.email || '' %>"/>
+        <% if (err.email) { %>
+          <span ><%= err.email %></span>
+        <% } %>
       </div>
+
       <div>
-        <label>Passowrd:</label>
-        <input required name="passowrd" />
-      <div>
-        <label>Confirm Passowrd:</label>
-        <input required name="confirmPassword" />
+        <label>Password:</label>
+        <input required name="password" type="password" value="<%= formData.password || '' %>"/>
+        <% if (err.password) { %>
+          <span ><%= err.password %></span>
+        <% } %>
       </div>
-      <button type='submit'>Submit</button>
+
+      <div>
+        <label>Confirm Password:</label>
+        <input required name="confirmPassword" type="password" value="<%= formData.confirmPassword || '' %>"/>
+        <% if (err.confirmPassword) { %>
+          <span ><%= err.confirmPassword %></span>
+        <% } %>
+      </div>
+      <button type="submit">Submit</button>
     </form>
   </body>
 </html>

@@ -4,6 +4,7 @@ import {
   type Request,
   type Response,
 } from "express";
+import passport from "passport";
 
 const loginRouter = Router();
 

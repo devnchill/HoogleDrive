@@ -2,17 +2,18 @@
   <body >
   <form action="/login" method="POST" >
     <div >
-      <label for="email">email</label>
-      <input required id="email" name="email" placeholder="email" type="text" />
+      <label for="userName">Username:</label>
+      <input required id="userName" name="userName" placeholder="userName" type="text" />
     </div>
     <div >
-      <label for="password">Password</label>
+      <label for="password">Password:</label>
       <input required id="password" name="password" type="password" />
     </div>
     <% if (message) { %>
       <p ><%= message %></p>
     <% } %>
     <button type="submit">Log In</button>
+    <p>New User?<a href='/signup'>Signup</a></p>
   </form>
 </body>
 </html>

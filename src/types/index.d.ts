@@ -5,3 +5,9 @@ declare global {
     interface User extends PrismaUser {}
   }
 }
+
+declare module "express-session" {
+  interface SessionData {
+    messages?: string[];
+  }
+}

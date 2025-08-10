@@ -56,10 +56,13 @@ export async function postSigUpForm(
   try {
     const { userName, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    await prismaClient.user.create({
+    const user = await prismaClient.user.create({
       data: { userName, email, hashedPassword },
     });
-    res.redirect("/");
+    req.login(user, (err) => {
+      if (err) return next(err);
+      return res.redirect("/");
+    });
   } catch (err: any) {
     if (err.code === "P2002" && err.meta?.target?.includes("email")) {
       return res.status(400).render("signup", {

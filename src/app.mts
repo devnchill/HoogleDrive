@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 import passport from "passport";
 import "./auth/config.mjs";
 import signupRouter from "./router/signupRouter.mjs";
+import loginRouter from "./router/loginRouter.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,6 +39,15 @@ app.use(passport.session());
 
 app.use("/signup", signupRouter);
 app.use("/", indexRouter);
+app.get("/login", loginRouter);
+app.get("/logout", logoutRouter);
+app.use((_: Request, res: Response, _next: NextFunction) => {
+  res.status(404).render("partial/error", {
+    message: "Page not found",
+    stack: "",
+  });
+});
+
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const error = err instanceof Error ? err : new Error(String(err));
   res.status(500).render("partial/error", {

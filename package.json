@@ -31,6 +31,7 @@
   "dependencies": {
     "@prisma/client": "^6.13.0",
     "@quixo3/prisma-session-store": "^3.1.13",
+    "@tailwindcss/cli": "^4.1.11",
     "bcryptjs": "^3.0.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
@@ -38,6 +39,7 @@
     "express-validator": "^7.2.1",
     "multer": "^2.0.2",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "tailwindcss": "^4.1.11"
   }
 }

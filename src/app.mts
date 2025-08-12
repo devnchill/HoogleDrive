@@ -45,7 +45,7 @@ app.use("/signup", signupRouter);
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
-app.use("/uploads", uploadRouter);
+app.use("/upload", uploadRouter);
 app.use((_: Request, res: Response, _next: NextFunction) => {
   res.status(404).render("partial/error", {
     message: "Page not found",

@@ -21,4 +21,29 @@ model User {
   email          String
   hashedPassword String   @map("hashed_password")
   createdAt      DateTime @default(now()) @map("created_at")
+  Folder         Folder[]
+  File           File[]
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  userId    Int
+  name      String
+  files     File[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, name])
+}
+
+model File {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  name      String
+  userId    Int
+  folderId  Int
+  folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([folderId, name])
 }

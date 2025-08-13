@@ -1,0 +1,13 @@
+<html>
+<body>
+  <%-include('partial/upload') %>
+  <% if(folders && folders.length > 0) { %>
+    <% folders.forEach((folder)=>{ %>
+      <div id='<%= folder.id %>' >
+        <p><%=folder.name %></p>
+        <p><%=folder.createdAt%></p>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+</html>

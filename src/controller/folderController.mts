@@ -4,16 +4,23 @@ import prismaClient from "../lib/prismaClient.mjs";
 export async function getAllFolders(
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) {
-  const folders = await prismaClient.folder.findMany();
+  if (!req.user?.id) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  const folders = await prismaClient.folder.findMany({
+    where: {
+      userId: req.user?.id,
+    },
+  });
   res.render("folders", { folders });
 }
 
 export async function createFolder(
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) {
   if (!req.user?.id) {
     return res.status(401).json({ error: "Unauthorized" });

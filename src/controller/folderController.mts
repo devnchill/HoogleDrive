@@ -34,3 +34,20 @@ export async function createFolder(
   });
   res.redirect("/folders");
 }
+
+export async function deleteFolder(
+  req: Request,
+  res: Response,
+  _next: NextFunction,
+) {
+  if (!req.params.folderId) {
+    return res.status(401).json({ error: "Invalid FolderId" });
+  }
+  const { folderId } = req.params;
+  await prismaClient.folder.delete({
+    where: {
+      id: parseInt(folderId),
+    },
+  });
+  res.redirect("/folders");
+}

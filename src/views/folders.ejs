@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
   </head>
-<body class="bg-black h-full text-white">
+<body class=" h-full ">
   <form method='POST' action='/folders'>
     <div>
       <label>Create Folder</label>
@@ -14,12 +14,21 @@
   </form>
   <% if(folders && folders.length > 0) { %>
     <% folders.forEach((folder)=>{ %>
-      <div id='<%= folder.id %>' class="flex items-center align-items gap-4"  >
+      <div id='<%= folder.id %>' class="flex items-center gap-4"  >
         <p><%=folder.name %></p>
+        <!-- TODO: Format Date Properly -->
         <p><%=folder.createdAt%></p>
-        <button class="border border-white">Delete</button>
+        <button onClick="deleteFolder(<%=folder.id%>)" class="border border-white">Delete</button>
       </div>
     <% }) %>
   <% } %>
 </body>
+<script>
+  function deleteFolder(folderId){
+    fetch(`/folders/${folderId}`, { method: 'DELETE',credentials:'include'})
+    .then(res => {
+      if (res.ok) window.location.reload(); 
+    })
+    .catch(err => console.error(err));}
+</script>
 </html>

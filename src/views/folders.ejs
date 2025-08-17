@@ -1,13 +1,34 @@
 <html>
-<body>
-  <%-include('partial/upload') %>
+  <head> 
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+  </head>
+<body class=" h-full ">
+  <form method='POST' action='/folders'>
+    <div>
+      <label>Create Folder</label>
+      <input name='folderName' type='text' placeholder="folder name"/>
+    </div>
+    <button type="submit">Create</button>
+  </form>
   <% if(folders && folders.length > 0) { %>
     <% folders.forEach((folder)=>{ %>
-      <div id='<%= folder.id %>' >
+      <div id='<%= folder.id %>' class="flex items-center gap-4"  >
         <p><%=folder.name %></p>
+        <!-- TODO: Format Date Properly -->
         <p><%=folder.createdAt%></p>
+        <button onClick="deleteFolder(<%=folder.id%>)" class="border border-white">Delete</button>
       </div>
     <% }) %>
   <% } %>
 </body>
+<script>
+  function deleteFolder(folderId){
+    fetch(`/folders/${folderId}`, { method: 'DELETE',credentials:'include'})
+    .then(res => {
+      if (res.ok) window.location.reload(); 
+    })
+    .catch(err => console.error(err));}
+</script>
 </html>

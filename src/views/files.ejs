@@ -1,0 +1,28 @@
+<html>
+  <head> 
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+  </head>
+<body class=" h-full ">
+  <% if(files && files.length > 0) { %>
+    <% files.forEach((file)=>{ %>
+      <div id='<%= file.id %>' class="flex items-center gap-4"  >
+        <p><%=file.name %></p>
+        <!-- TODO: Format Date Properly -->
+        <p><%=file.createdAt%></p>
+        <button onClick="deletefile(<%=file.id%>)" class="border">Delete</button>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+
+<script>
+  function deletefile(fileId){
+    fetch(`/folders/files/${fileId}`, { method: 'DELETE',credentials:'include'})
+    .then(res => {
+      if (res.ok) document.getElementById(fileId).remove();
+    })
+    .catch(err => console.error(err));}
+</script>
+</html>

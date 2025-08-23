@@ -49,5 +49,5 @@ export async function deleteFolder(
       id: parseInt(folderId),
     },
   });
-  res.redirect("/folders");
+  return res.json({ success: true, folderId });
 }

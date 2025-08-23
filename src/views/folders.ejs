@@ -18,7 +18,7 @@
         <p><%=folder.name %></p>
         <!-- TODO: Format Date Properly -->
         <p><%=folder.createdAt%></p>
-        <button onClick="deleteFolder(<%=folder.id%>)" class="border border-white">Delete</button>
+        <button onClick="deleteFolder(<%=folder.id%>)" class="border">Delete</button>
       </div>
     <% }) %>
   <% } %>
@@ -27,7 +27,7 @@
   function deleteFolder(folderId){
     fetch(`/folders/${folderId}`, { method: 'DELETE',credentials:'include'})
     .then(res => {
-      if (res.ok) window.location.reload(); 
+      if (res.ok) document.getElementById(folderId).remove();
     })
     .catch(err => console.error(err));}
 </script>

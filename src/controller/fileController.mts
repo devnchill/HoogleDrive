@@ -16,5 +16,31 @@ export async function getAllFiles(
   });
   res.render("files", { files });
 }
+
+export async function getFilesOfAFolder(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  if (!req.user?.id) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  if (!req.params.folderId) {
+    return next(new Error("No such folder found"));
+  }
+  const { folderId } = req.params;
+  const folderIdInt = parseInt(folderId);
+  if (isNaN(folderIdInt)) {
+    return next(new Error("No such folder found"));
+  }
+  const files = await prismaClient.file.findMany({
+    where: {
+      userId: req.user.id,
+      folderId: folderIdInt,
+    },
+  });
+  res.render("files", { files });
+}
+
 export async function deleteFile(fileId: number) {}
 export async function editFile(fileName: string) {}

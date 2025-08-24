@@ -6,6 +6,7 @@ import {
 } from "../controller/folderController.mjs";
 import ensureLoggedIn from "../auth/ensureAuth.mjs";
 import fileRouter from "./fileRouter.mjs";
+import { getAllFiles } from "../controller/fileController.mjs";
 
 const folderRouter = Router();
 
@@ -14,6 +15,7 @@ folderRouter.get("/", getAllFolders);
 folderRouter.post("/", createFolder);
 folderRouter.delete("/:folderId", deleteFolder);
 
-folderRouter.delete("/:folderId/files", fileRouter);
+folderRouter.get("/files/all", getAllFiles);
+folderRouter.use("/:folderId/files", fileRouter);
 
 export default folderRouter;

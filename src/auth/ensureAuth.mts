@@ -1,12 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
-
-export default function ensureAuthed(
+export default function ensureLoggedIn(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  if (req.isAuthenticated && req.isAuthenticated()) {
+  if (req.isAuthenticated?.() && req.user) {
     return next();
   }
-  return res.redirect("/");
+  return res.status(401).render("login", {
+    message: "You need to be logged in to do that.",
+  });
 }

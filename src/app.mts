@@ -46,6 +46,9 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
 app.use("/folders", folderRouter);
+app.use("/upload", (_req: Request, res: Response) =>
+  res.render("partial/upload"),
+);
 app.use((_: Request, res: Response, _next: NextFunction) => {
   res.status(404).render("partial/error", {
     message: "Page not found",

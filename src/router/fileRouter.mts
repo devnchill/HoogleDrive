@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ensureAuthed from "../auth/ensureAuth.mjs";
+import ensureLoggedIn from "../auth/ensureAuth.mjs";
 import {
   deleteFile,
   editFile,
@@ -8,7 +8,7 @@ import {
 
 const fileRouter = Router();
 
-fileRouter.use(ensureAuthed);
+fileRouter.use(ensureLoggedIn);
 
 fileRouter.get("/", getAllFiles);
 fileRouter.delete("/fileId", deleteFile);

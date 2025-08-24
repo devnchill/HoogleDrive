@@ -4,12 +4,12 @@ import {
   deleteFolder,
   getAllFolders,
 } from "../controller/folderController.mjs";
-import ensureAuthed from "../auth/ensureAuth.mjs";
+import ensureLoggedIn from "../auth/ensureAuth.mjs";
 import fileRouter from "./fileRouter.mjs";
 
 const folderRouter = Router();
 
-folderRouter.use(ensureAuthed);
+folderRouter.use(ensureLoggedIn);
 folderRouter.get("/", getAllFolders);
 folderRouter.post("/", createFolder);
 folderRouter.delete("/:folderId", deleteFolder);

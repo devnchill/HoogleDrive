@@ -38,15 +38,20 @@ export async function createFolder(
 export async function deleteFolder(
   req: Request,
   res: Response,
-  _next: NextFunction,
+  next: NextFunction,
 ) {
   if (!req.params.folderId) {
     return res.status(401).json({ error: "Invalid FolderId" });
   }
   const { folderId } = req.params;
+  if (!req.user?.id) {
+    return next(new Error("user id not found"));
+  }
+  const userId = req.user?.id;
   await prismaClient.folder.delete({
     where: {
       id: parseInt(folderId),
+      userId,
     },
   });
   return res.json({ success: true, folderId });

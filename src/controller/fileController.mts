@@ -42,5 +42,25 @@ export async function getFilesOfAFolder(
   res.render("files", { files });
 }
 
-export async function deleteFile(fileId: number) {}
+export async function deleteFile(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  if (!req.params.fileId) {
+    return next(new Error("file id not found"));
+  }
+  const { fileId } = req.params;
+  if (!req.user?.id) {
+    return next(new Error("user id not found"));
+  }
+  const userId = req.user?.id;
+  await prismaClient.file.delete({
+    where: {
+      id: parseInt(fileId),
+      userId,
+    },
+  });
+  return res.json({ success: true, fileId });
+}
 export async function editFile(fileName: string) {}

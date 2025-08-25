@@ -39,7 +39,7 @@ export async function getFilesOfAFolder(
       folderId: folderIdInt,
     },
   });
-  res.render("files", { files });
+  res.render("files", { files, folderId: folderIdInt });
 }
 
 export async function deleteFile(

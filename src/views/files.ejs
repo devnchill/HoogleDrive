@@ -18,8 +18,9 @@
 </body>
 
 <script>
+  const folderId  = "<%=folderId%>";
   function deletefile(fileId){
-    fetch(`/folders/files/${fileId}`, { method: 'DELETE',credentials:'include'})
+    fetch(`/folders/${folderId}/files/${fileId}`, { method: 'DELETE',credentials:'include'})
     .then(res => {
       if (res.ok) document.getElementById(fileId).remove();
     })

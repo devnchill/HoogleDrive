@@ -11,7 +11,7 @@ const fileRouter = Router({ mergeParams: true });
 fileRouter.use(ensureLoggedIn);
 
 fileRouter.get("/", getFilesOfAFolder);
-fileRouter.delete("/fileId", deleteFile);
-fileRouter.put("/fileId", editFile);
+fileRouter.delete("/:fileId", deleteFile);
+fileRouter.put("/:fileId", editFile);
 
 export default fileRouter;

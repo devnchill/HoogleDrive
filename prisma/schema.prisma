@@ -18,7 +18,7 @@ model Session {
 model User {
   id             Int      @id @default(autoincrement())
   userName       String   @unique @map("user_name") @db.VarChar(255)
-  email          String
+  email          String   @unique @db.VarChar(255)
   hashedPassword String   @map("hashed_password")
   createdAt      DateTime @default(now()) @map("created_at")
   Folder         Folder[]

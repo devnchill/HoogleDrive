@@ -2,10 +2,14 @@
   <body>
   <!-- TODO: dropdown menu to list all folders-->
     <form action="/upload" enctype="multipart/form-data" method="post">
-      <div class="form-group">
-        <input type="file" class="form-control-file" name="uploaded_file">
-        <button type="submit">Upload File</button>
-      </div>
+      <label>Select Folder </label>
+      <select name="folderId">
+        <% folders.forEach((folder)=>{ %>
+          <option value=<%=folder.id%> id=<%=folder.id%> > <%=folder.name%></option>
+        <% }) %>
+      </select>
+      <input type="file" class="form-control-file" name="uploaded_file">
+      <button type="submit">Upload File</button>
     </form>
   </body>
 </html>

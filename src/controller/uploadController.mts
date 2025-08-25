@@ -2,9 +2,9 @@ import type { NextFunction, Request, Response } from "express";
 import prismaClient from "../lib/prismaClient.mjs";
 
 export async function uploadFormGET(
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) {
   const folders = await prismaClient.folder.findMany();
   res.render("partial/upload", { folders });
@@ -27,7 +27,8 @@ export async function uploadFormPOST(
     data: {
       name: req.file?.filename,
       userId,
-      folderId,
+      folderId: parseInt(folderId),
     },
   });
+  res.redirect(`/folders/${folderId}/files`);
 }

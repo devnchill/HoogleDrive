@@ -14,7 +14,7 @@ export async function getAllFiles(
       userId: req.user.id,
     },
   });
-  res.render("files", { files });
+  res.render("allFiles", { files });
 }
 
 export async function getFilesOfAFolder(

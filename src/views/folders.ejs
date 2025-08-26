@@ -15,7 +15,7 @@
   <% if(folders && folders.length > 0) { %>
     <% folders.forEach((folder)=>{ %>
       <div id='<%= folder.id %>' class="flex items-center gap-4"  >
-        <p><%=folder.name %></p>
+        <p><a href="/folders/<%=folder.id%>/files"><%=folder.name %></a></p>
         <!-- TODO: Format Date Properly -->
         <p><%=folder.createdAt%></p>
         <button onClick="deleteFolder(<%=folder.id%>)" class="border">Delete</button>

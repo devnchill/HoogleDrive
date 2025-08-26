@@ -3,15 +3,15 @@ import ensureLoggedIn from "../auth/ensureAuth.mjs";
 import {
   deleteFile,
   editFile,
-  getAllFiles,
+  getFilesOfAFolder,
 } from "../controller/fileController.mjs";
 
-const fileRouter = Router();
+const fileRouter = Router({ mergeParams: true });
 
 fileRouter.use(ensureLoggedIn);
 
-fileRouter.get("/", getAllFiles);
-fileRouter.delete("/fileId", deleteFile);
-fileRouter.put("/fileId", editFile);
+fileRouter.get("/", getFilesOfAFolder);
+fileRouter.delete("/:fileId", deleteFile);
+fileRouter.put("/:fileId", editFile);
 
 export default fileRouter;

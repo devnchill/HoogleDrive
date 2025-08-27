@@ -45,6 +45,7 @@ model File {
   folder      Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   user        User     @relation(fields: [userId], references: [id])
   storagePath String   @default("") @map("storage_path")
+  fileSize    Int      @default(0) @map("file_size")
 
   @@unique([folderId, name])
 }

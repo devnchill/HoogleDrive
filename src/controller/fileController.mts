@@ -63,4 +63,4 @@ export async function deleteFile(
   });
   return res.json({ success: true, fileId });
 }
-export async function editFile(fileName: string) {}
+export async function editFile(_fileName: string) {}

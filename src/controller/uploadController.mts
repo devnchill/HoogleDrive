@@ -23,11 +23,13 @@ export async function uploadFormPOST(
   }
   const userId = req.user.id;
   const { folderId } = req.body;
+
   await prismaClient.file.create({
     data: {
-      name: req.file?.filename,
+      name: req.file?.originalname,
       userId,
       folderId: parseInt(folderId),
+      storagePath: "",
     },
   });
   res.redirect(`/folders/${folderId}/files`);

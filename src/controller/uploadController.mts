@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import prismaClient from "../lib/prismaClient.mjs";
+import supabaseClient from "../lib/supabaseClient.mjs";
 
 export async function uploadFormGET(
   _req: Request,
@@ -18,18 +19,30 @@ export async function uploadFormPOST(
   if (!req.user?.id) {
     return next(new Error("UserId Not Found"));
   }
-  if (!req.file?.filename) {
-    return next(new Error("FileName Not Found"));
+  if (!req.file?.buffer) {
+    return next(new Error("File buffer Not Found"));
   }
   const userId = req.user.id;
   const { folderId } = req.body;
+  const file = req.file.buffer;
+  const fileName = req.file.originalname;
+  const filePath = `${userId}/${folderId}/${fileName}`;
+
+  const { error } = await supabaseClient.storage
+    .from("HoogleDrive")
+    .upload(filePath, file);
+
+  if (error) {
+    return next(new Error(`File upload failed: ${error.message}`));
+  }
 
   await prismaClient.file.create({
     data: {
-      name: req.file?.originalname,
+      name: fileName,
       userId,
       folderId: parseInt(folderId),
-      storagePath: "",
+      storagePath: filePath,
+      fileSize: file.length,
     },
   });
   res.redirect(`/folders/${folderId}/files`);

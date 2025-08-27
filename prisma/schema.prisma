@@ -37,14 +37,14 @@ model Folder {
 }
 
 model File {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  name      String
-  userId    Int
-  folderId  Int
-  folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id])
-  url       String   @default("")
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now()) @map("created_at")
+  name        String
+  userId      Int
+  folderId    Int
+  folder      Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id])
+  storagePath String   @default("") @map("storage_path")
 
   @@unique([folderId, name])
 }

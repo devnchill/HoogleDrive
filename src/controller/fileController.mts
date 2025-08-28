@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import prismaClient from "../lib/prismaClient.mjs";
+import supabaseClient from "../lib/supabaseClient.mjs";
 
 export async function getAllFiles(
   req: Request,
@@ -63,4 +64,26 @@ export async function deleteFile(
   });
   return res.json({ success: true, fileId });
 }
-export async function editFile(fileName: string) {}
+
+export async function downloadFile(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  if (!req.params.fileId) return "File Id not found";
+  const fileId = parseInt(req.params.fileId, 10);
+  if (isNaN(fileId)) return next(new Error("Invalid file id"));
+  const file = await prismaClient.file.findUnique({ where: { id: fileId } });
+  if (!file) return next(new Error("File not found"));
+  const { data, error } = await supabaseClient.storage
+    .from("HoogleDrive")
+    .download(file.storagePath);
+  if (error) return next(new Error(error.message));
+  if (!data) return next(new Error("No data received"));
+  const buffer = Buffer.from(await data.arrayBuffer());
+  res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+  res.setHeader("Content-Type", "application/octet-stream");
+  res.send(buffer);
+}
+
+export async function editFile(_fileName: string) {}

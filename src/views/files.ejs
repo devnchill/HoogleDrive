@@ -11,6 +11,7 @@
         <p><%=file.name %></p>
         <!-- TODO: Format Date Properly -->
         <p><%=file.createdAt%></p>
+        <a href="/folders/<%=folderId%>/files/<%=file.id%>/download">Download</a>
         <button onClick="deletefile(<%=file.id%>)" class="border">Delete</button>
       </div>
     <% }) %>
@@ -24,6 +25,7 @@
     .then(res => {
       if (res.ok) document.getElementById(fileId).remove();
     })
-    .catch(err => console.error(err));}
+    .catch(err => console.error(err));
+   }
 </script>
 </html>

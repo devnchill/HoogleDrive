@@ -1,19 +1,28 @@
 <html>
-  <body >
-  <form action="/login" method="POST" >
-    <div >
-      <label for="userName">Username:</label>
-      <input required id="userName" name="userName" placeholder="userName" type="text" />
-    </div>
-    <div >
-      <label for="password">Password:</label>
-      <input required id="password" name="password" type="password" />
-    </div>
-    <% if (message) { %>
-      <p ><%= message %></p>
-    <% } %>
-    <button type="submit">Log In</button>
-    <p>New User?<a href='/signup'>Signup</a></p>
-  </form>
+  <head>
+    <link rel="stylesheet" href="/css/reboot.css" />
+    <link rel="stylesheet" href="/css/output.css" />
+  </head>
+  <body class="h-full bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat flex justify-center items-center " >
+    <form action="/login" method="POST" class="backdrop-blur-lg rounded-lg border border-white p-6 grid gap-6" >
+      <h1 class="text-center text-3xl text-white">Login</h1>
+      <div class="input-div">
+        <span class="icon"><ion-icon size="small" name="person-circle-outline"></ion-icon></span>
+        <input required id="userName" name="userName" type="text" />
+        <label for="userName" class="text-white">Username</label>
+      </div>
+      <div class="input-div">
+        <span class="icon"><ion-icon size="small" name="lock-closed-outline"></ion-icon></span>
+        <input required id="password" name="password" type="password" />
+        <label for="password" class="text-white">Password</label>
+      </div>
+      <% if (message) { %>
+        <p ><%= message %></p>
+      <% } %>
+      <button type="submit" class="text-black border border-whtie rounded-lg bg-white w-full ">Log In</button>
+      <p class="text-white ">New User? <a href='/signup'class="text-center text-blue-500">Signup</a></p>
+    </form>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

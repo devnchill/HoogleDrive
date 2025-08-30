@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="/css/output.css" />
   </head>
   <body class="h-full bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat flex justify-center items-center ">
-    <div id="form-container" class="outline outline-white p-12 rounded-md backdrop-blur-lg grid gap-8">
+    <div id="form-container" class="outline outline-white p-8 rounded-md backdrop-blur-lg grid gap-8">
       <form method="POST" action="/signup" class="grid gap-4">
         <h1 class="text-center text-white text-3xl">SignUp</h1>
         <div class="input-div">
-          <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+          <span class="icon"><ion-icon size="small" name="person-circle-outline"></ion-icon></span>
           <input required name="userName" value="<%= formData.userName || '' %>" class="border border-white"/>
           <label class="text-white">UserName</label>
           <% if (err.userName) { %>
@@ -19,7 +19,7 @@
 
         <div class="input-div">
           <span class="icon">
-            <ion-icon name="mail-outline"></ion-icon>
+            <ion-icon size="small" name="mail-outline"></ion-icon>
           </span>
           <input required name="email" value="<%= formData.email || '' %>"class="border border-white"/>
           <label class="text-white">Email</label>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="input-div">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <span class="icon"><ion-icon size="small" name="lock-closed-outline"></ion-icon></span>
           <input required name="password" type="password" value="<%= formData.password || '' %>" class="border border-white"/>
           <label class="text-white">Password</label>
           <% if (err.password) { %>
@@ -38,16 +38,16 @@
         </div>
 
         <div class="input-div">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <span class="icon"><ion-icon size="small" name="lock-closed-outline"></ion-icon></span>
           <input required name="confirmPassword" type="password" value="<%= formData.confirmPassword || '' %>"class="border border-white"/>
           <label class="text-white">Confirm Password</label>
           <% if (err.confirmPassword) { %>
             <span ><%= err.confirmPassword %></span>
           <% } %>
         </div>
-        <button type="submit" class="text-white">Submit</button>
+        <button type="submit" class=" cursor-pointer text-black bg-white rounded-lg h-8">Submit</button>
       </form>
-      <p class="text-white">Already a User? <a href='/login' class="text-blue-500"> Login</a> </p>
+      <p class="text-white text-center">Already a User? <a href='/login' class="text-blue-500"> Login</a> </p>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

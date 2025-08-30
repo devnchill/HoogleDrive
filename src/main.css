@@ -5,11 +5,16 @@
 }
 
 .input-div label {
-  @apply absolute top-1/2 left-5 -translate-y-1/2 transform;
+  @apply absolute top-3 left-0 -translate-y-1/2 transform transition duration-500;
 }
 
 .input-div input {
-  @apply w-full h-12 bg-transparent border-0 outline-0 text-sm;
+  @apply w-full h-12 bg-transparent border-0 outline-0 text-sm text-white;
+}
+
+.input-div input:valid ~ label,
+.input-div input:focus ~ label {
+  @apply -translate-y-6 text-xs;
 }
 
 .input-div .icon {

@@ -4,36 +4,43 @@
     <link rel="stylesheet" href="/css/reboot.css" />
     <link rel="stylesheet" href="/css/output.css" />
   </head>
-  <body class="h-full bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat flex justify-center items-center">
-    <div id="form-container" class="outline outline-white p-12 rounded-md backdrop-blur-lg">
-      <form method="POST" action="/signup">
-        <div class="flex flex-col">
-          <label class="text-white">UserName:</label>
+  <body class="h-full bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat flex justify-center items-center ">
+    <div id="form-container" class="outline outline-white p-12 rounded-md backdrop-blur-lg grid gap-8">
+      <form method="POST" action="/signup" class="grid gap-4">
+        <h1 class="text-center text-white text-3xl">SignUp</h1>
+        <div class="input-div">
+          <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
           <input required name="userName" value="<%= formData.userName || '' %>" class="border border-white"/>
+          <label class="text-white">UserName</label>
           <% if (err.userName) { %>
             <span ><%= err.userName %></span>
           <% } %>
         </div>
 
-        <div class="flex flex-col">
-          <label class="text-white">Email:</label>
+        <div class="input-div">
+          <span class="icon">
+            <ion-icon name="mail-outline"></ion-icon>
+          </span>
           <input required name="email" value="<%= formData.email || '' %>"class="border border-white"/>
+          <label class="text-white">Email</label>
           <% if (err.email) { %>
             <span ><%= err.email %></span>
           <% } %>
         </div>
 
-        <div class="flex flex-col">
-          <label class="text-white">Password:</label>
+        <div class="input-div">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
           <input required name="password" type="password" value="<%= formData.password || '' %>" class="border border-white"/>
+          <label class="text-white">Password</label>
           <% if (err.password) { %>
             <span ><%= err.password %></span>
           <% } %>
         </div>
 
-        <div class="flex flex-col">
-          <label class="text-white">Confirm Password:</label>
+        <div class="input-div">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
           <input required name="confirmPassword" type="password" value="<%= formData.confirmPassword || '' %>"class="border border-white"/>
+          <label class="text-white">Confirm Password</label>
           <% if (err.confirmPassword) { %>
             <span ><%= err.confirmPassword %></span>
           <% } %>
@@ -42,5 +49,7 @@
       </form>
       <p class="text-white">Already a User? <a href='/login' class="text-blue-500"> Login</a> </p>
     </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
 </html>

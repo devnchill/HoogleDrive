@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+.input-div {
+  @apply relative w-96 m-6 border-b-white border-b-2;
+}
+
+.input-div label {
+  @apply absolute top-1/2 left-5 -translate-y-1/2 transform;
+}
+
+.input-div input {
+  @apply w-full h-12 bg-transparent border-0 outline-0 text-sm;
+}
+
+.input-div .icon {
+  @apply absolute text-sm text-white h-14 right-2;
+}

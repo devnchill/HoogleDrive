@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .input-div {
-  @apply relative w-96 m-6 border-b-white border-b-2;
+  @apply relative w-96 mb-6 border-b-white border-b-2;
 }
 
 .input-div label {

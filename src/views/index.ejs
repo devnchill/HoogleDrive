@@ -6,14 +6,19 @@
     <link href="./css/reboot.css" rel="stylesheet">
     <link href="./css/output.css" rel="stylesheet">
   </head>
-  <body class="h-full bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat"> 
-    <nav class="relative h-16 flex justify-center items-center">
-      <h1 class="text-5xl text-white border-white border-b-4 p-2 ">HoogleDrive</h1>
+  <body class="h-full  bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat grid grid-rows-[10%_1fr] grid-cols-[20%_1fr] gap-8 p-4"> 
+    <nav class="border-4 border-white rounded-lg  glass relative flex justify-center items-center row-start-1 row-span-1 col-start-1 col-span-2">
+      <h1 class="text-white border-white p-2 text-5xl">HoogleDrive</h1>
       <span class="absolute right-4 top-1/2 -translate-y-1/2">
         <ion-icon size="large" name="log-out-outline" class="text-white"></ion-icon>
       </span>
     </nav>
-    <p class="text-3xl font-italic text-white underline">    Hello world!  </p>
+    <aside class=" border-4 border-white rounded-lg glass flex flex-col gap-4 p-4 row-start-2 row-span-2 col-start-1 col-span-1">
+      <button class="rounded-lg cursor-pointer h-6 text-md text-black bg-white">Upload File</button>
+      <button class="rounded-lg cursor-pointer h-6 text-md text-black bg-white">View Folders</button>
+      <button class="rounded-lg cursor-pointer h-6 text-md text-black bg-white">View All Files</button>
+    </aside>
+    <main class="border-4 border-white rounded-lg glass row-start-2 row-span-1 col-start-2 col-span-1">Welcome to HoogleDrive.</main>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>

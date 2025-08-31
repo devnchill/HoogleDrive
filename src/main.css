@@ -20,3 +20,7 @@
 .input-div .icon {
   @apply absolute text-sm text-white h-14 right-2;
 }
+
+.glass {
+  @apply backdrop-blur-sm;
+}

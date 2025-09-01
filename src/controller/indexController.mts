@@ -8,8 +8,6 @@ export async function getLandingPage(
 ) {
   if (req.isAuthenticated()) {
     const user = req.user;
-    console.log(user.userName);
-
     const folders = await prismaClient.folder.findMany({
       where: {
         userId: user.id,

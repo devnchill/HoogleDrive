@@ -11,6 +11,7 @@ import { getAllFiles } from "../controller/fileController.mjs";
 const folderRouter = Router();
 
 folderRouter.use(ensureLoggedIn);
+folderRouter.get("/create", (_req, res) => res.render("partial/createFolder"));
 folderRouter.get("/", getAllFolders);
 folderRouter.post("/", createFolder);
 folderRouter.delete("/:folderId", deleteFolder);

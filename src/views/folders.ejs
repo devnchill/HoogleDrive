@@ -1,35 +1,57 @@
-<html>
+<!doctype html>
+<html class="h-full">
   <head> 
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./css/output.css" rel="stylesheet">
     <link href="./css/reboot.css" rel="stylesheet">
+    <link href="./css/output.css" rel="stylesheet">
   </head>
-<body class=" h-full ">
-  <form method='POST' action='/folders'>
-    <div>
-      <label>Create Folder</label>
-      <input name='folderName' type='text' placeholder="folder name"/>
-    </div>
-    <button type="submit">Create</button>
-  </form>
-  <% if(folders && folders.length > 0) { %>
-    <% folders.forEach((folder)=>{ %>
-      <div id='<%= folder.id %>' class="flex items-center gap-4"  >
-        <p><a href="/folders/<%=folder.id%>/files"><%=folder.name %></a></p>
-        <!-- TODO: Format Date Properly -->
-        <p><%=folder.createdAt%></p>
-        <button onClick="deleteFolder(<%=folder.id%>)" class="border">Delete</button>
-      </div>
-    <% }) %>
-  <% } %>
-</body>
-<script>
-  function deleteFolder(folderId){
-    fetch(`/folders/${folderId}`, { method: 'DELETE',credentials:'include'})
-    .then(res => {
-      if (res.ok) document.getElementById(folderId).remove();
-    })
-    .catch(err => console.error(err));}
-</script>
+  <body class="h-full  bg-[url('/images/forest.jpg')] bg-center bg-cover bg-no-repeat grid grid-rows-[10%_1fr] grid-cols-[20%_1fr] gap-8 p-4"> 
+    <nav class="border-4 border-white rounded-lg  glass relative flex justify-center items-center row-start-1 row-span-1 col-start-1 col-span-2">
+      <h1 class="text-white border-white p-2 text-5xl">HoogleDrive</h1>
+      <span class="absolute right-4 top-1/2 -translate-y-1/2">
+        <a href="/logout"><ion-icon size="large" name="log-out-outline" class="text-white"></ion-icon></a>
+      </span>
+    </nav>
+    <aside class="glass border-4 border-white rounded-lg flex flex-col gap-4 p-4">
+      <a href="/upload" class="rounded-lg h-10 bg-white text-black flex items-center justify-center hover:bg-gray-200">
+        Upload File
+      </a>
+      <a href="/folders" class=" cursor-pointer rounded-lg h-10 bg-white text-black flex items-center justify-center hover:bg-gray-200">
+        View Folders
+      </a>
+      <a href="/folders/files/all" class="cursor-pointer rounded-lg h-10 bg-white text-black flex items-center justify-center hover:bg-gray-200">
+        View All Files
+      </a>
+    </aside>
+    <main class="border-4 border-white rounded-lg glass row-start-2 row-span-1 col-start-2 col-span-1 p-8 text-white flex flex-col">
+      <section class="flex-1 overflow-y-auto grid grid-cols-2 gap-4">
+        <% if(folders && folders.length > 0) { %>
+          <% folders.forEach((folder) => { %>
+            <div id="<%= folder.id %>" class="p-4 bg-white rounded-lg flex flex-col justify-between hover:bg-gray-100 transition">
+              <a href="/folders/<%= folder.id %>/files" class="font-semibold text-lg text-black hover:underline"><%= folder.name %></a>
+              <p class="text-sm text-black">Created: <%= folder.createdAt.toDateString() %></p>
+              <button 
+                onClick="deleteFolder(<%= folder.id %>)" 
+                class="mt-2 py-1 px-3 bg-green-500 text-black font-bold rounded-lg hover:bg-green-300 transition duration-200"
+              >
+                Delete
+              </button>
+            </div>
+          <% }) %>
+        <% } %>
+      </section>
+    </main>
+    <script>
+      function deleteFolder(folderId) {
+        fetch(`/folders/${folderId}`, { method: 'DELETE', credentials: 'include' })
+          .then(res => {
+            if (res.ok) document.getElementById(folderId).remove();
+          })
+          .catch(err => console.error(err));
+      }
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </body>
 </html>

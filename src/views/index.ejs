@@ -13,11 +13,17 @@
         <ion-icon size="large" name="log-out-outline" class="text-white"></ion-icon>
       </span>
     </nav>
-    <aside class=" border-4 border-white rounded-lg glass flex flex-col gap-4 p-4 row-start-2 row-span-2 col-start-1 col-span-1">
-      <button class="rounded-lg cursor-pointer h-6 text-md text-black bg-white">Upload File</button>
-      <button class="rounded-lg cursor-pointer h-6 text-md text-black bg-white">View Folders</button>
-      <button class="rounded-lg cursor-pointer h-6 text-md text-black bg-white">View All Files</button>
-    </aside>
+  <aside class="glass border-4 border-white rounded-lg flex flex-col gap-4 p-4">
+    <a href="/upload" class="rounded-lg h-10 bg-white text-black flex items-center justify-center hover:bg-gray-200">
+      Upload File
+    </a>
+    <a href="/folders" class=" cursor-pointer rounded-lg h-10 bg-white text-black flex items-center justify-center hover:bg-gray-200">
+      View Folders
+    </a>
+    <a href="/folders/files/all" class="cursor-pointer rounded-lg h-10 bg-white text-black flex items-center justify-center hover:bg-gray-200">
+      View All Files
+    </a>
+  </aside>
     <main class="border-4 border-white rounded-lg glass row-start-2 row-span-1 col-start-2 col-span-1">Welcome to HoogleDrive.</main>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

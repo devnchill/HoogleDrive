@@ -3,11 +3,16 @@ import prismaClient from "../lib/prismaClient.mjs";
 import supabaseClient from "../lib/supabaseClient.mjs";
 
 export async function uploadFormGET(
-  _req: Request,
+  req: Request,
   res: Response,
   _next: NextFunction,
 ) {
-  const folders = await prismaClient.folder.findMany();
+  if (!req.user?.id) return res.json("unauthorized");
+  const folders = await prismaClient.folder.findMany({
+    where: {
+      userId: req.user.id,
+    },
+  });
   res.render("partial/upload", { folders });
 }
 

@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import prismaClient from "../lib/prismaClient.mjs";
 
 export async function getLandingPage(
   req: Request,
@@ -6,7 +7,20 @@ export async function getLandingPage(
   _next: NextFunction,
 ) {
   if (req.isAuthenticated()) {
-    return res.render("index");
+    const user = req.user;
+    console.log(user.userName);
+
+    const folders = await prismaClient.folder.findMany({
+      where: {
+        userId: user.id,
+      },
+    });
+    const files = await prismaClient.file.findMany({
+      where: {
+        userId: user.id,
+      },
+    });
+    return res.render("index", { user: user, folders, files });
   }
   res.redirect("/signup");
 }

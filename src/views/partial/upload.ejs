@@ -24,18 +24,29 @@
       View All Files
     </a>
   </aside>
-    <main class="border-4 border-white rounded-lg glass row-start-2 row-span-1 col-start-2 col-span-1">
-      <form action="/upload" enctype="multipart/form-data" method="post">
-        <label>Select Folder </label>
-        <select name="folderId">
+  <main class="border-4 border-white rounded-lg glass row-start-2 row-span-1 col-start-2 col-span-1 flex items-center justify-center p-8">
+    <form action="/upload" enctype="multipart/form-data" method="post" class="flex flex-col gap-6 w-full max-w-md text-white">
+      <h2 class="text-3xl font-bold mb-4 text-center">Upload a File</h2>
+
+      <div class="flex flex-col gap-2">
+        <label for="folderId" class="text-lg font-semibold">Select Folder</label>
+        <select name="folderId" id="folderId" class="p-2 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-green-400">
           <% folders.forEach((folder)=>{ %>
-            <option value=<%=folder.id%> id=<%=folder.id%> > <%=folder.name%></option>
+            <option value="<%= folder.id %>"><%= folder.name %></option>
           <% }) %>
         </select>
-        <input type="file" class="form-control-file" name="uploaded_file">
-        <button type="submit">Upload File</button>
-      </form>
-    </main>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="uploaded_file" class="text-lg font-semibold">Choose File</label>
+        <input type="file" name="uploaded_file" id="uploaded_file" class="p-2 rounded-md bg-white text-black file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-green-400 file:text-black file:font-semibold hover:file:bg-green-300">
+      </div>
+
+      <button type="submit" class="mt-4 py-3 px-6 bg-green-500  text-black font-bold rounded-lg hover:bg-green-300 transition duration-200">
+        Upload File
+      </button>
+    </form>
+  </main>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>

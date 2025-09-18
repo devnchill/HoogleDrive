@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc && node dist/app.mjs",
+    "start": "tsc && node dist/app.mjs",
     "build": "tsc",
     "tailwind": "npx @tailwindcss/cli -i ./src/main.css -o ./public/css/output.css --watch"
   },

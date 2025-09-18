@@ -24,7 +24,7 @@
     "@types/express-session": "^1.18.2",
     "@types/express-validator": "^2.20.33",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.2.1",
+    "@types/node": "^24.5.2",
     "@types/passport": "^1.0.17",
     "@types/passport-local": "^1.0.38",
     "prisma": "^6.13.0",

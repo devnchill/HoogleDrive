@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import prismaClient from "../lib/prismaClient.mjs";
 import supabaseClient from "../lib/supabaseClient.mjs";
+import { randomUUID } from "crypto";
 
 export async function uploadFormGET(
   req: Request,
@@ -31,7 +32,8 @@ export async function uploadFormPOST(
   const { folderId } = req.body;
   const file = req.file.buffer;
   const fileName = req.file.originalname;
-  const filePath = `${userId}/${folderId}/${fileName}`;
+  const uniqueName = `${Date.now()}-${userId}-${randomUUID()}`;
+  const filePath = `${userId}/${folderId}/${uniqueName}`;
 
   const { error } = await supabaseClient.storage
     .from("HoogleDrive")

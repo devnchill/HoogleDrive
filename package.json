@@ -28,11 +28,11 @@
     "@types/node": "^24.5.2",
     "@types/passport": "^1.0.17",
     "@types/passport-local": "^1.0.38",
-    "prisma": "^6.13.0",
+    "prisma": "^6.19.0",
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@prisma/client": "^6.13.0",
+    "@prisma/client": "^6.19.0",
     "@quixo3/prisma-session-store": "^3.1.13",
     "@supabase/supabase-js": "^2.57.4",
     "@tailwindcss/cli": "^4.1.11",

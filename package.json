@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc && node dist/app.mjs",
-    "start": "tsc && node dist/app.mjs",
-    "build": "tsc",
+    "start": "node dist/app.mjs",
+    "build": "npm install && npx prisma generate && npm run tailwind && tsc",
     "tailwind": "npx @tailwindcss/cli -i ./src/main.css -o ./public/css/output.css --watch"
   },
   "repository": {

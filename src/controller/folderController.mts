@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import prismaClient from "../lib/prismaClient.mjs";
+import { prisma } from "../lib/prismaClient.mjs";
 
 export async function getAllFolders(
   req: Request,
@@ -9,7 +9,7 @@ export async function getAllFolders(
   if (!req.user?.id) {
     return res.status(401).json({ error: "Unauthorized" });
   }
-  const folders = await prismaClient.folder.findMany({
+  const folders = await prisma.folder.findMany({
     where: {
       userId: req.user?.id,
     },
@@ -26,7 +26,7 @@ export async function createFolder(
     return res.status(401).json({ error: "Unauthorized" });
   }
   const { folderName } = req.body;
-  await prismaClient.folder.create({
+  await prisma.folder.create({
     data: {
       name: folderName,
       userId: req.user?.id,
@@ -43,12 +43,15 @@ export async function deleteFolder(
   if (!req.params.folderId) {
     return res.status(401).json({ error: "Invalid FolderId" });
   }
-  const { folderId } = req.params;
+  const folderId = Array.isArray(req.params.folderId)
+    ? req.params.folderId[0]
+    : req.params.folderId;
+  if (!folderId) return next(new Error("invalid FolderId"));
   if (!req.user?.id) {
     return next(new Error("user id not found"));
   }
   const userId = req.user?.id;
-  await prismaClient.folder.delete({
+  await prisma.folder.delete({
     where: {
       id: parseInt(folderId),
       userId,

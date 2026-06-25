@@ -2,7 +2,7 @@ import express from "express";
 import type { Request, Response, NextFunction } from "express";
 import expressSession from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
-import { PrismaClient } from "../generated/prisma/index.js";
+import { prisma } from "./lib/prismaClient.mjs";
 import indexRouter from "./router/indexRouter.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -34,7 +34,7 @@ app.use(
     secret: "a santa at nasa",
     resave: false,
     saveUninitialized: false,
-    store: new PrismaSessionStore(new PrismaClient(), {
+    store: new PrismaSessionStore(prisma, {
       checkPeriod: 2 * 60 * 1000,
       dbRecordIdIsSessionId: true,
     }),

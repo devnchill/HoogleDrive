@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import prismaClient from "../lib/prismaClient.mjs";
+import { prisma } from "../lib/prismaClient.mjs";
 import supabaseClient from "../lib/supabaseClient.mjs";
 import { randomUUID } from "crypto";
 
@@ -9,7 +9,7 @@ export async function uploadFormGET(
   _next: NextFunction,
 ) {
   if (!req.user?.id) return res.json("unauthorized");
-  const folders = await prismaClient.folder.findMany({
+  const folders = await prisma.folder.findMany({
     where: {
       userId: req.user.id,
     },
@@ -43,7 +43,7 @@ export async function uploadFormPOST(
     return next(new Error(`File upload failed: ${error.message}`));
   }
 
-  await prismaClient.file.create({
+  await prisma.file.create({
     data: {
       name: fileName,
       userId,

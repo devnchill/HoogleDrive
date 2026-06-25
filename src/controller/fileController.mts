@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import prismaClient from "../lib/prismaClient.mjs";
+import { prisma } from "../lib/prismaClient.mjs";
 import supabaseClient from "../lib/supabaseClient.mjs";
 
 export async function getAllFiles(
@@ -10,7 +10,7 @@ export async function getAllFiles(
   if (!req.user?.id) {
     return res.status(401).json({ error: "Unauthorized" });
   }
-  const files = await prismaClient.file.findMany({
+  const files = await prisma.file.findMany({
     where: {
       userId: req.user.id,
     },
@@ -29,12 +29,18 @@ export async function getFilesOfAFolder(
   if (!req.params.folderId) {
     return next(new Error("No such folder found"));
   }
-  const { folderId } = req.params;
+  const folderId = Array.isArray(req.params.folderId)
+    ? req.params.folderId[0]
+    : req.params.folderId;
+  if (!folderId) {
+    return next(new Error(`Failed to load files`));
+  }
+
   const folderIdInt = parseInt(folderId);
   if (isNaN(folderIdInt)) {
     return next(new Error("No such folder found"));
   }
-  const files = await prismaClient.file.findMany({
+  const files = await prisma.file.findMany({
     where: {
       userId: req.user.id,
       folderId: folderIdInt,
@@ -51,12 +57,16 @@ export async function deleteFile(
   if (!req.params.fileId) {
     return next(new Error("file id not found"));
   }
-  const { fileId } = req.params;
+  const fileId = Array.isArray(req.params.fileId)
+    ? req.params.fileId[0]
+    : req.params.fileId;
+  if (!fileId) return next(new Error(`Failed to load files`));
+
   if (!req.user?.id) {
     return next(new Error("user id not found"));
   }
   const userId = req.user?.id;
-  await prismaClient.file.delete({
+  await prisma.file.delete({
     where: {
       id: parseInt(fileId),
       userId,
@@ -70,10 +80,13 @@ export async function downloadFile(
   res: Response,
   next: NextFunction,
 ) {
-  if (!req.params.fileId) return "File Id not found";
-  const fileId = parseInt(req.params.fileId, 10);
-  if (isNaN(fileId)) return next(new Error("Invalid file id"));
-  const file = await prismaClient.file.findUnique({ where: { id: fileId } });
+  const fileId = Array.isArray(req.params.fileId)
+    ? req.params.fileId[0]
+    : req.params.fileId;
+  if (!fileId) return next(new Error(`Failed to load files`));
+  const file = await prisma.file.findUnique({
+    where: { id: parseInt(fileId) },
+  });
   if (!file) return next(new Error("File not found"));
   const { data, error } = await supabaseClient.storage
     .from("HoogleDrive")

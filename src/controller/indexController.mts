@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import prismaClient from "../lib/prismaClient.mjs";
+import { prisma } from "../lib/prismaClient.mjs";
 
 export async function getLandingPage(
   req: Request,
@@ -8,12 +8,12 @@ export async function getLandingPage(
 ) {
   if (req.isAuthenticated()) {
     const user = req.user;
-    const folders = await prismaClient.folder.findMany({
+    const folders = await prisma.folder.findMany({
       where: {
         userId: user.id,
       },
     });
-    const files = await prismaClient.file.findMany({
+    const files = await prisma.file.findMany({
       where: {
         userId: user.id,
       },

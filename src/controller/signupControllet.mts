@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import prismaClient from "../lib/prismaClient.mjs";
 import bcrypt from "bcryptjs";
 import { body, validationResult } from "express-validator";
+import { prisma } from "../lib/prismaClient.mjs";
 
 export function getSigUpForm(
   _req: Request,
@@ -56,7 +56,7 @@ export async function postSigUpForm(
   try {
     const { userName, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await prismaClient.user.create({
+    const user = await prisma.user.create({
       data: { userName, email, hashedPassword },
     });
     req.login(user, (err) => {
